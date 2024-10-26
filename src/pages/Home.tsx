@@ -5,14 +5,15 @@ import Filters from 'components/Filters';
 import MovieTable from 'components/MovieTable';
 import { Movie } from 'types';
 import { Container } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 
 const App: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('movie');
+  const [activeFilter, setActiveFilter] = useState('');
   const [searchText, setSearchText] = useState('pokemon');
   const [yearFilter, setYearFilter] = useState('');
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
+  const isMobile = useMediaQuery('(max-width:600px)');
   const navigate = useNavigate();
 
   const handleMovieClick = (row: Movie) => {
@@ -43,13 +44,15 @@ const App: React.FC = () => {
         my: { xs: 0, md: 5 },
         flexDirection: { xs: 'column', md: 'row' }
       }}>
+        {isMobile && <Search searchText={searchText} setSearchText={setSearchText} />}
         <Filters 
           activeFilter={activeFilter} 
           setActiveFilter={setActiveFilter} 
           yearFilter={yearFilter} 
           setYearFilter={setYearFilter} 
         />
-        <Search searchText={searchText} setSearchText={setSearchText} />
+        {!isMobile &&<Search searchText={searchText} setSearchText={setSearchText} />}
+        
       </Container>
       <Container sx={{ maxWidth: '100% !important' }}>
         <MovieTable

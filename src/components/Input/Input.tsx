@@ -8,6 +8,8 @@ interface InputProps {
   isSearchInput?: boolean;
   debounceDelay?: number;
   value?: string;
+  width?:string
+  className?:string,
 }
 
 const Input: React.FC<InputProps> = ({ 
@@ -15,7 +17,8 @@ const Input: React.FC<InputProps> = ({
   onChange, 
   isSearchInput = false, 
   debounceDelay = 300,
-  value = '' 
+  value = '',
+  className
 }) => {
   const [inputValue, setInputValue] = useState(value);
   
@@ -44,7 +47,7 @@ const Input: React.FC<InputProps> = ({
       {isSearchInput && <SearchIcon sx={{ color: 'gray' }} className={styles.icon} />}
       <input
         type="text"
-        className={styles.input}
+        className={`${styles.input} ${className}`}
         placeholder={placeholder}
         value={inputValue}
         onChange={handleInputChange}
