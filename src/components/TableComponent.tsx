@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
 import Paper from '@mui/material/Paper';
+import { useMediaQuery } from '@mui/material';
 
 interface Data {
   imdbID: string;
@@ -49,6 +50,8 @@ const TableComponent: React.FC<TableComponentProps> = ({
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [orderBy, setOrderBy] = useState<keyof Data>('Title');
   const [imageError, setImageError] = useState<{ [key: string]: boolean }>({});
+
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   const handleRequestSort = (property: keyof Data) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -109,7 +112,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
                 <TableRow key={row.imdbID} onClick={() => onRowClick(row)} sx={{ cursor: 'pointer', color: 'white' }}>
                   <TableCell sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
                     {imageError[row.imdbID] || !row.Poster ? (
-                      <div style={{ paddingLeft:2,marginRight:4,width: 50, height: 75, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#444', color: 'white' }}>
+                      <div style={{ paddingLeft: 2, marginRight: 4, width: 50, height: 75, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#444', color: 'white' }}>
                         No image found
                       </div>
                     ) : (
@@ -120,8 +123,11 @@ const TableComponent: React.FC<TableComponentProps> = ({
                         onError={() => setImageError((prev) => ({ ...prev, [row.imdbID]: true }))}
                       />
                     )}
-                    {row.Title}
+                    <div style={{ maxWidth: isMobile ? 250 : 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {row.Title}
+                    </div>
                   </TableCell>
+
                   <TableCell align="right" sx={{ color: 'white' }}>{row.Year}</TableCell>
                   <TableCell align="right" sx={{ color: 'white' }}>{row.imdbID}</TableCell>
                   <TableCell align="right" sx={{ color: 'white' }}>
