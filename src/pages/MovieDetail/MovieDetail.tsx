@@ -4,7 +4,16 @@ import { fetchMovieDetails } from '../../store/moviesSlice';
 import { RootState } from '../../store/store';
 import { useParams } from 'react-router-dom';
 import { AppDispatch } from '../../store/store';
-import { CircularProgress } from '@mui/material';
+import {
+  CircularProgress,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Button,
+  Paper,
+} from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
 import './MovieDetail.scss';
 
 const MovieDetail: React.FC = () => {
@@ -22,22 +31,35 @@ const MovieDetail: React.FC = () => {
   }, [imdbID, dispatch]);
 
   if (loading) return <CircularProgress />;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <Typography color="error">Error: {error}</Typography>;
 
-  if (!currentMovie) return <p>No movie details found.</p>;
+  if (!currentMovie) return <Typography>No movie details found.</Typography>;
 
   return (
-    <div className="movie-detail">
-      <img src={currentMovie.Poster} alt={currentMovie.Title} className="movie-poster" />
-      <h1 className="movie-title">{currentMovie.Title}</h1>
-      <p><strong>Year:</strong> {currentMovie.Year}</p>
-      <p><strong>Genre:</strong> {currentMovie.Genre}</p>
-      <p><strong>Director:</strong> {currentMovie.Director}</p>
-      <p><strong>Runtime:</strong> {currentMovie.Runtime}</p>
-      <p><strong>IMDb Rating:</strong> {currentMovie.imdbRating}</p>
-      <p><strong>Cast:</strong> {currentMovie.Actors}</p>
-      <p><strong>Plot:</strong> {currentMovie.Plot}</p>
-    </div>
+    <Box className="movie-detail-container" display="flex" flexDirection={{ xs: 'column', md: 'row' }} p={2} bgcolor="#f5f5f5">
+      <Box flex={{ xs: 'none', md: '1' }} mb={{ xs: 2, md: 0 }} mr={{ md: 2 }}>
+        <Paper elevation={3} className="movie-poster-container">
+          <img src={currentMovie.Poster} alt={currentMovie.Title} className="movie-poster" />
+        </Paper>
+      </Box>
+      <Box flex={{ xs: 'none', md: '2' }}>
+        <Card elevation={4} className="movie-details-card">
+          <CardContent>
+            <Typography variant="h3" gutterBottom>{currentMovie.Title}</Typography>
+            <Typography variant="h6" color="textSecondary">{currentMovie.Year}</Typography>
+            <Box display="flex" alignItems="center">
+              <StarIcon color="primary" />
+              <Typography variant="h6" className="rating">{currentMovie.imdbRating}</Typography>
+            </Box>
+            <Typography variant="subtitle1"><strong>Genre:</strong> {currentMovie.Genre}</Typography>
+            <Typography variant="subtitle1"><strong>Director:</strong> {currentMovie.Director}</Typography>
+            <Typography variant="subtitle1"><strong>Runtime:</strong> {currentMovie.Runtime}</Typography>
+            <Typography variant="subtitle1"><strong>Cast:</strong> {currentMovie.Actors}</Typography>
+            <Typography variant="body1" paragraph><strong>Plot:</strong> {currentMovie.Plot}</Typography>
+          </CardContent>
+        </Card>
+      </Box>
+    </Box>
   );
 };
 
