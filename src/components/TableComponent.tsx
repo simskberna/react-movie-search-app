@@ -109,7 +109,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
                 <TableRow key={row.imdbID} onClick={() => onRowClick(row)} sx={{ cursor: 'pointer', color: 'white' }}>
                   <TableCell sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
                     {imageError[row.imdbID] || !row.Poster ? (
-                      <div style={{ width: 50, height: 75, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#444', color: 'white' }}>
+                      <div style={{ paddingLeft:2,marginRight:4,width: 50, height: 75, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#444', color: 'white' }}>
                         No image found
                       </div>
                     ) : (
@@ -124,7 +124,11 @@ const TableComponent: React.FC<TableComponentProps> = ({
                   </TableCell>
                   <TableCell align="right" sx={{ color: 'white' }}>{row.Year}</TableCell>
                   <TableCell align="right" sx={{ color: 'white' }}>{row.imdbID}</TableCell>
-                  <TableCell align="right" sx={{ color: 'white' }}>{row.Type}</TableCell>
+                  <TableCell align="right" sx={{ color: 'white' }}>
+                    <Box sx={{ bgcolor: '#273d8bba', borderRadius: 4, p: '0.5rem', display: 'flex', justifyContent: 'center' }}>
+                      {row.Type}
+                    </Box>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -132,7 +136,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
         </TableContainer>
         <TablePagination
           sx={{ color: 'white' }}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[]}
           component="div"
           count={totalCount}
           rowsPerPage={rowsPerPage}

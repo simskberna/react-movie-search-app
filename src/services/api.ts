@@ -15,10 +15,10 @@ export const getMoviesBySearch = async (
   search: string, 
   type?: string, 
   year?: string, 
-  page: number = 1, 
+  page: number = 1,
   rowsPerPage: number = 10
 ) => {
-  const response = await api.get(`?s=${search}&page=${page}&r=json&apikey=${API_KEY}`);
+  const response = await api.get(`?s=${search}&y=${year}&type=${type}&page=${page}&r=json&apikey=${API_KEY}`);
   
   const totalResults = response.data.totalResults ? parseInt(response.data.totalResults, 10) : 0;
 

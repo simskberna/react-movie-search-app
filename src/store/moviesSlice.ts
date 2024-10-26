@@ -20,11 +20,11 @@ const initialState: MoviesState = {
 
 export const fetchMovies = createAsyncThunk< 
   { movies: Movie[]; totalCount: number }, 
-  { searchText: string; activeFilter: string; yearFilter: string; page: number; rowsPerPage: number }
+  { searchText: string; activeFilter: string; yearFilter: string; page: number;rowsPerPage:number }
 >(
   'movies/fetchMovies',
-  async ({ searchText, activeFilter, yearFilter, page, rowsPerPage }) => {
-    const { movies, totalResults } = await getMoviesBySearch(searchText, activeFilter, yearFilter, page, rowsPerPage);
+  async ({ searchText, activeFilter, yearFilter, page,rowsPerPage  }) => {
+    const { movies, totalResults } = await getMoviesBySearch(searchText, activeFilter, yearFilter, page,rowsPerPage );
     return { movies, totalCount: totalResults };
   }
 );

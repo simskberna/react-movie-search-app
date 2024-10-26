@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies } from '../store/moviesSlice';
 import TableComponent from './TableComponent';
@@ -6,7 +6,6 @@ import { Movie } from '../types';
 import { AppDispatch, RootState } from '../store/store';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-
 
 interface MovieTableProps {
   searchText: string;
@@ -27,10 +26,10 @@ const MovieTable: React.FC<MovieTableProps> = ({
   rowsPerPage,
   onRowClick,
   onChangePage,
-  onChangeRowsPerPage,
+  onChangeRowsPerPage
 }) => {
   const dispatch = useDispatch<AppDispatch>();
-
+  
   const moviesData = useSelector((state: RootState) => state.movies.data);
   const loading = useSelector((state: RootState) => state.movies.loading);
   const totalCount = useSelector((state: RootState) => state.movies.totalCount) ?? 0;
@@ -39,16 +38,13 @@ const MovieTable: React.FC<MovieTableProps> = ({
     dispatch(fetchMovies({ searchText, activeFilter, yearFilter, page, rowsPerPage }));
   }, [searchText, activeFilter, yearFilter, page, rowsPerPage, dispatch]);
   
-
   const mappedMovies = moviesData.map(movie => ({
-      imdbID: movie.imdbID,
-      Title: movie.Title,
-      Year: movie.Year,
-      Type: movie.Type,
-      Poster: movie.Poster || '',
+    imdbID: movie.imdbID,
+    Title: movie.Title,
+    Year: movie.Year,
+    Type: movie.Type,
+    Poster: movie.Poster || '',
   }));
-  
-
 
   return (
     <>
@@ -84,7 +80,5 @@ const MovieTable: React.FC<MovieTableProps> = ({
     </>
   );
 };
-
-
 
 export default MovieTable;
