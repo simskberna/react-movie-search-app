@@ -10,7 +10,6 @@ import {
   CardContent,
   Typography,
   Box,
-  Button,
   Paper,
 } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
@@ -53,9 +52,12 @@ const MovieDetail: React.FC = () => {
             </Box>
             <Typography variant="subtitle1"><strong>Genre:</strong> {currentMovie.Genre}</Typography>
             <Typography variant="subtitle1"><strong>Director:</strong> {currentMovie.Director}</Typography>
-            <Typography variant="subtitle1"><strong>Runtime:</strong> {currentMovie.Runtime}</Typography>
+            <Box sx={{display:'flex',gap:1}}>
+              <strong>Duration:</strong>
+              <Typography variant="subtitle1" sx={{display:'flex', justifyContent:'center',borderRadius:5,bgcolor:'#554663',width:100}}>{currentMovie.Runtime}</Typography>
+            </Box>
             <Typography variant="subtitle1"><strong>Cast:</strong> {currentMovie.Actors}</Typography>
-            <Typography variant="body1" paragraph><strong>Plot:</strong> {currentMovie.Plot}</Typography>
+            <Typography variant="body1"><strong>Plot:</strong> {currentMovie.Plot}</Typography>
           </CardContent>
         </Card>
       </Box>

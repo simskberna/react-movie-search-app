@@ -11,6 +11,7 @@ export interface Movie {
   imdbRating?: string;
   Actors?: string;
 }
+
 export interface Data extends Movie {
   Poster?: string;
 }

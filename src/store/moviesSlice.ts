@@ -7,6 +7,7 @@ interface MoviesState {
   currentMovie: Movie | null;
   loading: boolean;
   error: string | null;
+  totalCount: number;
 }
 
 const initialState: MoviesState = {
@@ -14,13 +15,17 @@ const initialState: MoviesState = {
   currentMovie: null,
   loading: false,
   error: null,
+  totalCount: 0,
 };
 
-export const fetchMovies = createAsyncThunk<Movie[], { searchText: string; activeFilter: string; yearFilter: string }>(
+export const fetchMovies = createAsyncThunk< 
+  { movies: Movie[]; totalCount: number }, 
+  { searchText: string; activeFilter: string; yearFilter: string; page: number; rowsPerPage: number }
+>(
   'movies/fetchMovies',
-  async ({ searchText, activeFilter, yearFilter }) => {
-    const moviesData = await getMoviesBySearch(searchText, activeFilter, yearFilter);
-    return moviesData;
+  async ({ searchText, activeFilter, yearFilter, page, rowsPerPage }) => {
+    const { movies, totalResults } = await getMoviesBySearch(searchText, activeFilter, yearFilter, page, rowsPerPage);
+    return { movies, totalCount: totalResults };
   }
 );
 
@@ -39,16 +44,19 @@ const moviesSlice = createSlice({
     clearMovies: (state) => {
       state.data = [];
       state.currentMovie = null;
+      state.totalCount = 0;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMovies.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.data = action.payload.movies;
+        state.totalCount = action.payload.totalCount;
       })
       .addCase(fetchMovies.rejected, (state, action) => {
         state.loading = false;

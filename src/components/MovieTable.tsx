@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies } from '../store/moviesSlice';
 import TableComponent from './TableComponent';
@@ -6,6 +6,7 @@ import { Movie, Data } from '../types';
 import { AppDispatch, RootState } from '../store/store';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+
 
 interface MovieTableProps {
   searchText: string;
@@ -32,10 +33,22 @@ const MovieTable: React.FC<MovieTableProps> = ({
 
   const moviesData = useSelector((state: RootState) => state.movies.data);
   const loading = useSelector((state: RootState) => state.movies.loading);
+  const totalCount = useSelector((state: RootState) => state.movies.totalCount) ?? 0;
 
   useEffect(() => {
-    dispatch(fetchMovies({ searchText, activeFilter, yearFilter }));
-  }, [searchText, activeFilter, yearFilter, dispatch]);
+    dispatch(fetchMovies({ searchText, activeFilter, yearFilter, page, rowsPerPage }));
+  }, [searchText, activeFilter, yearFilter, page, rowsPerPage, dispatch]);
+  
+
+  const mappedMovies = moviesData.map(movie => ({
+      imdbID: movie.imdbID,
+      Title: movie.Title,
+      Year: movie.Year,
+      Type: movie.Type,
+      Poster: movie.Poster || '',
+  }));
+  
+
 
   return (
     <>
@@ -45,28 +58,25 @@ const MovieTable: React.FC<MovieTableProps> = ({
         </Box>
       ) : (
         <>
-          {moviesData.length === 0 ? (
+          {mappedMovies.length === 0 ? (
             <Box sx={{ textAlign: 'center', color: 'white', marginTop: 2 }}>
               <p>No data found.</p>
             </Box>
           ) : (
             <TableComponent
-              headCells={[
-                { id: 'Title', numeric: false, label: 'Name' },
-                { id: 'Year', numeric: true, label: 'Release Year' },
-                { id: 'imdbID', numeric: false, label: 'IMDb ID' },
-              ]}
-              rows={moviesData.map(movie => ({
-                imdbID: movie.imdbID,
-                Title: movie.Title,
-                Year: movie.Year,
-                Poster: movie.Poster || '',
-              }) as Data)}
+              rows={mappedMovies}
+              onRowClick={onRowClick}
               page={page}
               rowsPerPage={rowsPerPage}
+              totalCount={totalCount}
               onChangePage={onChangePage}
               onChangeRowsPerPage={onChangeRowsPerPage}
-              onRowClick={onRowClick}
+              headCells={[
+                { id: 'Title', numeric: false, label: 'Title' },
+                { id: 'Year', numeric: true, label: 'Year' },
+                { id: 'imdbID', numeric: true, label: 'IMDB ID' },
+                { id: 'Type', numeric: true, label: 'Type' },
+              ]}
             />
           )}
         </>
@@ -74,5 +84,7 @@ const MovieTable: React.FC<MovieTableProps> = ({
     </>
   );
 };
+
+
 
 export default MovieTable;
