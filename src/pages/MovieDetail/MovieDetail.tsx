@@ -4,7 +4,7 @@ import { fetchMovieDetails } from '../../store/moviesSlice';
 import { RootState } from '../../store/store';
 import { useParams } from 'react-router-dom';
 import { AppDispatch } from '../../store/store';
-import { CircularProgress, Typography, Paper, Grid, Chip } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import './MovieDetail.scss';
 
 const MovieDetail: React.FC = () => {
@@ -16,34 +16,28 @@ const MovieDetail: React.FC = () => {
   const error = useSelector((state: RootState) => state.movies.error);
 
   useEffect(() => {
-    if (imdbID && !currentMovie) {
+    if (imdbID) {
       dispatch(fetchMovieDetails(imdbID));
     }
-  }, [imdbID, dispatch, currentMovie]);
+  }, [imdbID, dispatch]);
 
-  if (loading) return <CircularProgress className="spinner" />;
+  if (loading) return <CircularProgress />;
   if (error) return <p>Error: {error}</p>;
 
   if (!currentMovie) return <p>No movie details found.</p>;
 
   return (
-    <Paper elevation={3} className="movie-detail">
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <img src={currentMovie.Poster} alt={currentMovie.Title} className="movie-poster" />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h4" className="movie-title">{currentMovie.Title}</Typography>
-          <Typography variant="subtitle1"><strong>Year:</strong> {currentMovie.Year}</Typography>
-          <Typography variant="subtitle1"><strong>Genre:</strong> <Chip label={currentMovie.Genre} /></Typography>
-          <Typography variant="subtitle1"><strong>Director:</strong> {currentMovie.Director}</Typography>
-          <Typography variant="subtitle1"><strong>Runtime:</strong> {currentMovie.Runtime}</Typography>
-          <Typography variant="subtitle1"><strong>IMDb Rating:</strong> {currentMovie.imdbRating}</Typography>
-          <Typography variant="subtitle1"><strong>Cast:</strong> {currentMovie.Actors}</Typography>
-          <Typography variant="body1" className="movie-plot"><strong>Plot:</strong> {currentMovie.Plot}</Typography>
-        </Grid>
-      </Grid>
-    </Paper>
+    <div className="movie-detail">
+      <img src={currentMovie.Poster} alt={currentMovie.Title} className="movie-poster" />
+      <h1 className="movie-title">{currentMovie.Title}</h1>
+      <p><strong>Year:</strong> {currentMovie.Year}</p>
+      <p><strong>Genre:</strong> {currentMovie.Genre}</p>
+      <p><strong>Director:</strong> {currentMovie.Director}</p>
+      <p><strong>Runtime:</strong> {currentMovie.Runtime}</p>
+      <p><strong>IMDb Rating:</strong> {currentMovie.imdbRating}</p>
+      <p><strong>Cast:</strong> {currentMovie.Actors}</p>
+      <p><strong>Plot:</strong> {currentMovie.Plot}</p>
+    </div>
   );
 };
 

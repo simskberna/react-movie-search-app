@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const navigate = useNavigate();
 
   const handleMovieClick = (row: Movie) => {
-    navigate(`/movie/${row.imdbID}`);
+    navigate(`/movie/${row.imdbID}`); 
   };
 
   return ( 

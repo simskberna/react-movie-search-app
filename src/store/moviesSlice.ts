@@ -4,16 +4,16 @@ import { Movie } from '../types';
 
 interface MoviesState {
   data: Movie[];
+  currentMovie: Movie | null;
   loading: boolean;
   error: string | null;
-  currentMovie: Movie | null;
 }
 
 const initialState: MoviesState = {
   data: [],
+  currentMovie: null,
   loading: false,
   error: null,
-  currentMovie: null,
 };
 
 export const fetchMovies = createAsyncThunk<Movie[], { searchText: string; activeFilter: string; yearFilter: string }>(
@@ -38,6 +38,7 @@ const moviesSlice = createSlice({
   reducers: {
     clearMovies: (state) => {
       state.data = [];
+      state.currentMovie = null;
     },
   },
   extraReducers: (builder) => {
