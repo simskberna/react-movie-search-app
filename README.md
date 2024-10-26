@@ -1,4 +1,3 @@
-The build is minified and the filenames include the hashes.\
 
 ## NOTE
 IF THE SERVER DOES NOT WORK YOU SHOULD TRY TO CHANGE REACT_APP_API_KEY in ENV.
