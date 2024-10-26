@@ -1,0 +1,29 @@
+.movie-detail {
+    padding: 20px;
+    margin: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    
+    .movie-title {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+  
+    .movie-poster {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  
+    .movie-plot {
+      margin-top: 10px;
+      color: #555;
+    }
+  
+    .spinner {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+  }
+  

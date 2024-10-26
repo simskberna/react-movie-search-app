@@ -7,7 +7,7 @@ import store ,{persistor} from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
-import MovieDetail from 'pages/MovieDetail';
+import MovieDetail from 'pages/MovieDetail/MovieDetail';
 import Home from './pages/Home'
 
 const root = ReactDOM.createRoot(
