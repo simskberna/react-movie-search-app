@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies } from '../store/moviesSlice';
 import TableComponent from './TableComponent';
-import { Movie, Data } from '../types';
+import { Movie } from '../types';
 import { AppDispatch, RootState } from '../store/store';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
