@@ -36,17 +36,17 @@ const MovieDetail: React.FC = () => {
   if (!currentMovie) return <Typography>No movie details found.</Typography>;
 
   return (
-    <Box className="movie-detail-container" display="flex" flexDirection={{ xs: 'column', md: 'row' }} p={2} bgcolor="#f5f5f5">
+    <Box className="movie-detail-container" display="flex" flexDirection={{ xs: 'column', md: 'row' }} p={2} bgcolor="#d1d1d11a;">
       <Box flex={{ xs: 'none', md: '1' }} mb={{ xs: 2, md: 0 }} mr={{ md: 2 }}>
-        <Paper elevation={3} className="movie-poster-container">
+        <Paper elevation={3} className="movie-poster-container" sx={{height:{xs:400,md:'auto'},width:{xs:'100%',md:500}}}>
           <img src={currentMovie.Poster} alt={currentMovie.Title} className="movie-poster" />
         </Paper>
       </Box>
       <Box flex={{ xs: 'none', md: '2' }}>
-        <Card elevation={4} className="movie-details-card">
+        <Card elevation={4} className="movie-details-card" sx={{minHeight:{md:'74vh'},bgcolor:'#d1d1d11a'}}>
           <CardContent>
             <Typography variant="h3" gutterBottom>{currentMovie.Title}</Typography>
-            <Typography variant="h6" color="textSecondary">{currentMovie.Year}</Typography>
+            <Typography variant="h6">{currentMovie.Year}</Typography>
             <Box display="flex" alignItems="center">
               <StarIcon color="primary" />
               <Typography variant="h6" className="rating">{currentMovie.imdbRating}</Typography>

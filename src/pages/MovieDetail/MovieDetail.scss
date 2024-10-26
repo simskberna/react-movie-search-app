@@ -1,8 +1,7 @@
 .movie-detail-container {
   padding: 20px;
-  background-color: #f5f5f5;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px #d1d1d11a; 
 
   .movie-poster-container {
     border-radius: 8px;
@@ -11,6 +10,7 @@
     
     .movie-poster {
       width: 100%;
+      height:100%;
       transition: transform 0.3s;
       &:hover {
         transform: scale(1.05);
@@ -20,6 +20,7 @@
 
   .movie-details-card {
     padding: 20px;
+    color:white;
     border-radius: 8px;
 
     .rating {
