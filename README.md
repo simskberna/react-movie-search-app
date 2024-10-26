@@ -5,6 +5,9 @@ IF THE SERVER DOES NOT WORK YOU SHOULD TRY TO CHANGE REACT_APP_API_KEY in ENV.
 
 ## Available Scripts
 
+To be sure that all the required packages installed, you can run:
+### `npm install`
+
 In the project directory, you can run:
 
 ### `npm start`
