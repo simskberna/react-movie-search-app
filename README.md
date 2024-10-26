@@ -1,4 +1,8 @@
 
+## Prerequisites
+Ensure you have Node.js installed (preferably version 14 or later).
+Ensure you have npm (Node Package Manager) installed (comes with Node.js).
+
 ## NOTE
 IF THE SERVER DOES NOT WORK YOU SHOULD TRY TO CHANGE REACT_APP_API_KEY in ENV.
 .env should be in gitignore but for this case it is public.
