@@ -1,30 +1,50 @@
+# Movie Search App 🎬🍿
 
-## Prerequisites
-Ensure you have Node.js installed (preferably version 14 or later).
-Ensure you have npm (Node Package Manager) installed (comes with Node.js).
+A sleek and responsive **React + TypeScript** app that lets you search for movies and TV shows, powered by the **OMDb API**. With features like **pagination**, **lazy-loaded images**, **debounced search**, and **broken image handling**, it's designed for speed and ease of use.
 
-## NOTE
-IF THE SERVER DOES NOT WORK YOU SHOULD TRY TO CHANGE REACT_APP_API_KEY in ENV.
-.env should be in gitignore but for this case it is public.
+---
 
-## Available Scripts
+## Features
 
-To be sure that all the required packages installed, you can run:
-### `npm install`
+- **Search Movies & TV Shows**: Type to search with real-time results.
+- **Lazy Loading**: Images load only when visible for faster performance.
+- **Pagination**: Browse search results with pagination.
+- **Error Handling**: Graceful handling of broken images.
+- **State Management**: Using **Redux** for smooth state handling.
+- **Modern UI**: Powered by **Material UI**.
+- **Optimized**: Axios for API calls, Lodash for utilities, SCSS for custom styling.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React** & **TypeScript**
+- **Redux** for state management
+- **OMDb API** for movie data
+- **Material UI** for components
+- **Axios** for API requests
+- **SCSS** for custom styles
+- **Lodash** for utilities
 
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Quick Start
 
-### `npm run build`
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/simskberna/react-movie-search-app.git
+   cd movie-search-app
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the app:
+   ```bash
+   npm start
+   ```
+
+Visit [http://localhost:3000](http://localhost:3000) in your browser!
 
