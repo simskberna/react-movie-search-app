@@ -1,7 +1,7 @@
 # Movie Search App 🎬🍿
 
 A sleek and responsive **React + TypeScript** app that lets you search for movies and TV shows, powered by the **OMDb API**. With features like **pagination**, **lazy-loaded images**, **debounced search**, and **broken image handling**, it's designed for speed and ease of use.
-
+live version : https://react-movie-search-app-alpha.vercel.app/
 ![How my app works](public/assets/react-movies-search-app.gif)
 
 ---
