@@ -2,7 +2,8 @@
 
 A sleek and responsive **React + TypeScript** app that lets you search for movies and TV shows, powered by the **OMDb API**. With features like **pagination**, **lazy-loaded images**, **debounced search**, and **broken image handling**, it's designed for speed and ease of use.
 
-![How my app works](assets/react-movies-search-app.gif)
+![How my app works](public/assets/react-movies-search-app.gif)
+
 ---
 
 ## Features
